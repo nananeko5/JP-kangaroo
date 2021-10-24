@@ -22,6 +22,13 @@ npm run lint
 ###git について
 ローカルとリモート紐づけ
 git remote add origin https://github.com/{user}/{repository_name}.git
+ブランチ移動
+git branch -m
+ステータス確認
+git status
+ローカルでリモートのbranchの更新を確認？
+git fetch
+
 ### Vueについて
 フロントエンド　コードbuild
 /frontend npm run build
