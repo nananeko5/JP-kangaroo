@@ -19,7 +19,7 @@ npm run build
 ```
 npm run lint
 ```
-###git について
+### git について
 ```
 ローカルとリモート紐づけ
 git remote add origin https://github.com/{user}/{repository_name}.git
