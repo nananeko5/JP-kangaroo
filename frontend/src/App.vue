@@ -1,32 +1,52 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <header class="page-header wrapper" >
+      <h1><a href="index.html"><img class="logo" src="./images/logo.svg" alt="NameCaホーム"/></a></h1>
+      <nav>
+        <ul class="main-nav">
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/create">Create</router-link></li>
+          <li><a herf="login.html">Log In</a></li>
+          <li><a herf="signup.html">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+    <router-view />
+
+    <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2021 JP-Kangaroo</small></p>
+      </div>
+    </footer>
   </div>
 </template>
 
-<style>
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+      activeIndex: this.$route.name
+    }
+  }
+}
+</script>
+
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+   font-family: "Yu Gothic medium", "游ゴシック Medium", Yugothic, "游ゴシック体", "ヒラギノ角 Pro W3", sans-serif;
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+a {
+  text-decoration: none;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.body-content{
+  height:380px;
 }
+</style>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style lang="scss">
+@import './css/style.css';
+
 </style>
