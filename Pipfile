@@ -4,14 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
-flask = "*"
 flask-restful = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
-
-[scripts]
-start = "python main.py"

@@ -5,7 +5,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'home'
+  name: 'home',
+  data () {
+    return {
+      tableData: []
+    }
+  },
+  mounted () {
+    this.updataTableData()
+  },
+  methods: {
+    updataTableData: function () {
+      axios.post('/server/api/spam', 'a').then(response => {
+        console.log(response.data)
+      }).catch(err => {
+        console.log(err)
+        return null
+      })
+    }
+  }
 }
 </script>
