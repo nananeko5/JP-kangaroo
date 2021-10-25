@@ -1,0 +1,6 @@
+{
+    "spam": [
+        { "id": 1, "name": "piyo", "note": "This is dummy piyo." },
+        { "id": 2, "name": "masa", "note": "This is dummy masa." }
+    ]
+}
