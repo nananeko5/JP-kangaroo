@@ -1,10 +1,13 @@
 module.exports = {
   assetsDir: 'static',
   devServer: {
+      port:8888,
     proxy: {
-        '^/server': {
+        '^/back/': {
             target: 'http://localhost:5000',
-            changeOrigin: true
+            changeOrigin: true,
+            pathRewrite: { "^/back/": "/back/" },
+            logLevel:'debug'
         }
     }
 }
