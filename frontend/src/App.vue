@@ -6,8 +6,8 @@
         <ul class="main-nav">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/create">Create</router-link></li>
-          <li><a herf="login.html">Log In</a></li>
-          <li><a herf="signup.html">Sign Up</a></li>
+          <li><router-link to="/signin">Sign In</router-link></li>
+          <li><router-link to="/signup">Sign Up</router-link></li>
         </ul>
       </nav>
     </header>

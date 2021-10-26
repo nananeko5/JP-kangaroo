@@ -2,31 +2,69 @@
     <div class="create-page body-content">
         <div class="left-block">
         card area
+        <h3>{{this.CARD_NAME}}</h3>
+        <h3>{{this.CARD_EMAIL}}</h3>
+        <h3>{{this.CARD_MESSAGE}}</h3>
         </div>
         <div class="right-block">
-            <form id="contact-form" class="form-horizontal" role="form">
+            <form  name="create_form" id="contact-form" class="form-horizontal" role="form">
             <div class="form-group ">
                 <div class="col-sm-12">
-                <input type="text" class="form-control form-category" id="name" placeholder="NAME" name="name" value="" required>
+                <input type="text" class="form-control form-category" id="name" placeholder="NAME" name="name" v-model="FORM_NAME">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input type="email" class="form-control form-category" id="email" placeholder="EMAIL" name="email" value="" required>
+                    <input type="email" class="form-control form-category" id="email" placeholder="EMAIL" name="email" v-model="FORM_EMAIL" required>
                 </div>
             </div>
 
-                <textarea class="form-control user-detail" rows="10" placeholder="MESSAGE" name="message" required style='font-family: "Yu Gothic medium", "游ゴシック Medium", Yugothic, "游ゴシック体", "ヒラギノ角 Pro W3", sans-serif;'></textarea>
-                <a class="button registor" href="share.html" >登録</a>
+                <textarea class="form-control user-detail" v-model="FORM_MESSAGE" rows="10" placeholder="MESSAGE" name="message" required style='font-family: "Yu Gothic medium", "游ゴシック Medium", Yugothic, "游ゴシック体", "ヒラギノ角 Pro W3", sans-serif;'></textarea>
+                <a class="button registor" @click="Create" >登録</a>
             </form>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'Create'
+  name: 'Create',
+  data () {
+    return {
+      CARD_NAME: '',
+      CARD_EMAIL: '',
+      CARD_MESSAGE: '',
+      FORM_NAME: '',
+      FORM_EMAIL: '',
+      FORM_MESSAGE: '',
+      myresponse: ''
+    }
+  },
+  methods: {
+    Create: function () {
+      var detail = [{ name: this.FORM_NAME, email: this.FORM_EMAIL, message: this.FORM_MESSAGE }]
+      axios.post('http://127.0.0.1:5000/api/spam', detail).then(response => {
+        this.$store.dispatch('createCard', { card_name: response.data[0].name, card_email: response.data[0].email, card_message: response.data[0].message })
+        console.log(this.$store.state)
+        this.CARD_NAME = response.data[0].name
+        this.CARD_EMAIL = response.data[0].email
+        this.CARD_MESSAGE = response.data[0].message
+        this.FORM_NAME = ''
+        this.FORM_EMAIL = ''
+        this.FORM_MESSAGE = ''
+        console.log(response.data)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  created () {
+    this.CARD_NAME = this.$store.state.card_name
+    this.CARD_EMAIL = this.$store.state.card_email
+    this.CARD_MESSAGE = this.$store.state.card_message
+  }
 }
 </script>
 

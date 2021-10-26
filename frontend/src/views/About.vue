@@ -6,7 +6,6 @@
 
 <script>
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:5000'
 export default {
   name: 'home',
   data () {
@@ -15,15 +14,16 @@ export default {
     }
   },
   mounted () {
+    console.log('start')
     this.updataTableData()
   },
   methods: {
     updataTableData: function () {
-      axios.post('/api/spam').then(response => {
+      axios.get('http://127.0.0.1:5000/api/spam').then(response => {
+        console.log('a')
         console.log(response.data)
       }).catch(err => {
         console.log(err)
-        return null
       })
     }
   }
