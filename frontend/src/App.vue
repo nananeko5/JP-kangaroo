@@ -7,7 +7,7 @@
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/create">Create</router-link></li>
           <li><router-link to="/signin">Sign In</router-link></li>
-          <li><router-link to="/signup">Sign Up</router-link></li>
+          <li @click='logout'>Log Out</li>
         </ul>
       </nav>
     </header>
@@ -22,11 +22,20 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app'
 export default {
   name: 'app',
   data () {
     return {
       activeIndex: this.$route.name
+    }
+  },
+  methods: {
+    logout: function () {
+      firebase.auth().signOut().then(() => {
+        this.$router.push('/')
+        this.$store.dispatch('createCard', { card_name: '', card_furigana: '', card_birthday: '', card_favourite: '', card_skills: '' })
+      })
     }
   }
 }

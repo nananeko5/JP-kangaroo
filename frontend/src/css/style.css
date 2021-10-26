@@ -91,3 +91,99 @@ footer p{
 	color: #fff;
 	font-size: 0.875rem;
 }
+
+/*card--------------------*/
+.namecard {
+	text-align:left;
+	display:inline-block;
+    /*名刺の区切れ目がわかるような線*/
+    border: 1px solid #ddd;
+	left:50%;
+    /*名刺の大きさ*/
+    width: 22.75rem;
+    height: 11.75rem;
+
+    /*名刺の余白*/
+    padding: 3rem;
+
+    /*装飾*/
+    color: #333;
+
+}
+
+.name {
+    /*文字の装飾*/
+    font-size: 1.8rem;
+
+    /*微妙にずれてるのを修正*/
+    margin-top: -2.0rem;
+    margin-left: -1.50rem;
+}
+
+.name2 {
+    /*文字の装飾*/
+    font-size: 2.0rem;
+
+    /*微妙にずれてるのを修正*/
+    margin-top: -1.0rem;
+    margin-left: 2.50rem;
+}
+
+
+.phonetic {
+    margin-left: -1.50rem;
+}
+
+.phonetic2 {
+    margin-left: 2.50rem;
+}
+
+.contact {
+    /*flexboxにして縦並びにしています*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    /*余白*/
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+
+    /*装飾*/
+    font-size: 0.8rem;
+
+}
+
+
+.contact span {
+    margin-top: 0.25rem;
+}
+
+.contact i {
+    /*SNSなどのアイコンの位置調整*/
+    width: 2.0rem;
+}
+
+.namecard img {
+    /*画像のサイズ指定*/
+    width: 7rem;
+    height: auto; 
+
+    /*画像の位置指定*/
+    position: relative;
+    left: 17.00rem;
+    bottom: 11.5rem;
+}
+
+.namecard-img img {
+    width: 7rem;
+    height: auto; 
+
+    /*画像の位置指定*/
+    position: relative;
+    left: 17.00rem;
+    bottom: 13.0rem;
+}

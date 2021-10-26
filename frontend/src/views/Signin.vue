@@ -12,7 +12,7 @@
 
 <script>
 import firebase from 'firebase/compat/app'
-
+import axios from 'axios'
 export default {
   name: 'Signin',
   data: function () {
@@ -25,8 +25,13 @@ export default {
     signIn: function () {
       firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
         user => {
-          alert('Success!')
           this.$router.push('/')
+          axios.post('http://127.0.0.1:5000/api/user_info').then(response => {
+            this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills })
+            console.log(this.$store.state)
+          }).catch(err => {
+            console.log(err)
+          })
         },
         err => {
           alert(err.message)
