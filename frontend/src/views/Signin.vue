@@ -25,11 +25,15 @@ export default {
     signIn: function () {
       firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(
         user => {
+          var detail = [{
+            uID: firebase.auth().currentUser.uid
+          }]
           this.$router.push('/')
-          axios.post('http://127.0.0.1:5000/api/user_info').then(response => {
-            this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills })
+          axios.post('http://127.0.0.1:5000/api/user_info', detail).then(response => {
+            this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills, uID: firebase.auth().currentUser.uid })
             console.log(this.$store.state)
           }).catch(err => {
+            this.$store.dispatch('authuID', { uID: firebase.auth().currentUser.uid })
             console.log(err)
           })
         },

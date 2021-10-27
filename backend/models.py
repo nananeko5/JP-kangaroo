@@ -6,7 +6,7 @@ db = SQLAlchemy()
 class Card(db.Model):
     __tablename__ = 'cards'
     imgpath = db.Column(db.String(100), nullable=True)
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(40), primary_key=True)
     name = db.Column(db.String(15), nullable=False)
     furigana = db.Column(db.String(30), nullable=False)
     birthday = db.Column(db.DateTime, nullable=False)
@@ -21,9 +21,10 @@ def get_all():
     return Card.query.order_by(Card.id).all()
 
 def insert(dictionary):
+    print("bbbbbbbbbbbbbb")
     card = Card(imgpath=dictionary['imgpath'],
                 name=dictionary['name'],
-                id=1,
+                id=dictionary['id']['uID'],
                 furigana=dictionary['furigana'],
                 birthday=dictionary['birthday'] ,
                 favourite=dictionary['favourite'],
@@ -32,7 +33,7 @@ def insert(dictionary):
     db.session.commit()
 
 def update(dictionary):
-    newcard=Card.query.get(1)
+    newcard=Card.query.filter(Card.id==dictionary['id']['uID']).first()
     newcard.imgpath=dictionary['imgpath']
     newcard.name=dictionary['name']
     newcard.furigana=dictionary['furigana']
@@ -49,9 +50,9 @@ def update(dictionary):
     # })
     db.session.commit()
 
-def print_card():
-    contents = Card.query.all()
-    for content in contents:
-        print('%d, %s %s %s' % (content.id, content.imgpath, content.name, content.furigana))
-        user_info = {'name':content.name,'furigana':content.furigana,'birthday':content.birthday,'favourite':content.favourite,'skills':content.skills}
+def print_card(id):
+    print(id)
+    print(Card.query.filter(Card.id == id).scalar())
+    content= Card.query.filter(Card.id==id).first()
+    user_info = {'name':content.name,'furigana':content.furigana,'birthday':content.birthday,'favourite':content.favourite,'skills':content.skills}
     return user_info

@@ -34,7 +34,7 @@ export default {
     logout: function () {
       firebase.auth().signOut().then(() => {
         this.$router.push('/')
-        this.$store.dispatch('createCard', { card_name: '', card_furigana: '', card_birthday: '', card_favourite: '', card_skills: '' })
+        this.$store.dispatch('createCard', { card_name: '', card_furigana: '', card_birthday: '', card_favourite: '', card_skills: '', uID: '' })
       })
     }
   }

@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
     // もしされていないならば、ログインページにリダイレクトします。
     if (!currentUser) {
       next({
-        path: '/',
+        path: '/signin',
         query: { redirect: to.fullPath }
       })
     } else {

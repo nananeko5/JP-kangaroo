@@ -41,6 +41,7 @@
 <script>
 import axios from 'axios'
 import Card1 from './card1'
+
 export default {
   components: { Card1 },
   name: 'Create',
@@ -68,13 +69,15 @@ export default {
         furigana: this.FORM_FURIGANA,
         birthday: this.FORM_BIRTHDAY,
         favourite: this.FORM_FAVOURITE,
-        skills: this.FORM_SKILLS
+        skills: this.FORM_SKILLS,
+        uID: this.$store.state.uID
       }]
+      console.log(detail)
       axios.post('http://127.0.0.1:5000/api/design', detail).then(response => {
         console.log(response.data)
         console.log(response.data.name)
         console.log(response.data.furigana)
-        this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills })
+        this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills, uID: this.$store.state.uID })
         console.log(this.$store.state)
         this.CARD_NAME = response.data.name
         this.CARD_FURIGANA = response.data.furigana

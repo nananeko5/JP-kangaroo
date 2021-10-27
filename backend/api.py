@@ -48,25 +48,26 @@ def create():
     birthday = datetime.strptime(birthday, '%Y-%m-%d')
     favourite = json[0]['favourite']
     skills = json[0]['skills']
-    dictionary={'imgpath': "aaa",'name':name,'furigana':furigana,'id':1,
+    uID =json[0]['uID']
+   
+    dictionary={'imgpath': "aaa",'name':name,'furigana':furigana,'id':uID,
                 'birthday':birthday,'favourite':favourite,'skills':skills}
-    
-    cards = Card.query.all()
-    if len(cards)>=1:
+
+    if Card.query.filter(Card.id == dictionary['id']['uID']).scalar() != None:
         update(dictionary)
         print("update!!")
     else :
         insert(dictionary)
-    cards = Card.query.all()
-    card =cards[0]
-    print_card()
+        print("insert!!")
+    card = Card.query.filter(Card.id==dictionary['id']['uID']).first()
     response_json={'name':card.name,'furigana':card.furigana,'birthday':card.birthday,'favourite':card.favourite,'skills':card.skills}
-    print(response_json)
     return jsonify(response_json)
 
 @api_bp.route('/user_info', methods=['POST'])
 def get_info():
-    response_json=print_card()
+    json=request.json
+    card= Card.query.filter(Card.id==json[0]['uID']).first()
+    response_json={'name':card.name,'furigana':card.furigana,'birthday':card.birthday,'favourite':card.favourite,'skills':card.skills}
     return jsonify(response_json)
 
 
