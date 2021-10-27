@@ -55,10 +55,10 @@ def create():
 
     if Card.query.filter(Card.id == dictionary['id']['uID']).scalar() != None:
         update(dictionary)
-        print("update!!")
+        print("update!")
     else :
         insert(dictionary)
-        print("insert!!")
+        print("insert!")
     card = Card.query.filter(Card.id==dictionary['id']['uID']).first()
     response_json={'name':card.name,'furigana':card.furigana,'birthday':card.birthday,'favourite':card.favourite,'skills':card.skills}
     return jsonify(response_json)
