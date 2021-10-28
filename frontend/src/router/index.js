@@ -5,6 +5,9 @@ import About from '../views/About.vue'
 import Create from '../views/Create.vue'
 import Signup from '../views/Signup.vue'
 import Signin from '../views/Signin.vue'
+import addcard from '../views/addcard.vue'
+import Gallery from '../views/Gallery.vue'
+import Showcard from '../views/Showcard.vue'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 Vue.use(Router)
@@ -35,6 +38,24 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin
+  },
+  {
+    path: '/addcard',
+    name: 'addcard',
+    component: addcard,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    component: Gallery,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/showcard',
+    name: 'Showcard',
+    component: Showcard,
+    meta: { requiresAuth: true }
   }
 ]
 

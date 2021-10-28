@@ -28,13 +28,23 @@ export default {
           var detail = [{
             uID: firebase.auth().currentUser.uid
           }]
-          this.$router.push('/')
           axios.post('http://127.0.0.1:5000/api/user_info', detail).then(response => {
-            this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills, uID: firebase.auth().currentUser.uid })
+            this.$store.dispatch('createCard', {
+              card_name: response.data.name,
+              card_furigana: response.data.furigana,
+              card_birthday: response.data.birthday,
+              card_favourite: response.data.favourite,
+              card_skills: response.data.skills,
+              card_code: response.data.card_code,
+              uID: firebase.auth().currentUser.uid
+            })
             console.log(this.$store.state)
+            this.$router.push('/')
           }).catch(err => {
+            console.log(firebase.auth().currentUser.uid)
             this.$store.dispatch('authuID', { uID: firebase.auth().currentUser.uid })
             console.log(err)
+            this.$router.push('/')
           })
         },
         err => {

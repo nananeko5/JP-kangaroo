@@ -70,6 +70,7 @@ export default {
         birthday: this.FORM_BIRTHDAY,
         favourite: this.FORM_FAVOURITE,
         skills: this.FORM_SKILLS,
+        card_code: this.$store.state.card_code,
         uID: this.$store.state.uID
       }]
       console.log(detail)
@@ -77,7 +78,14 @@ export default {
         console.log(response.data)
         console.log(response.data.name)
         console.log(response.data.furigana)
-        this.$store.dispatch('createCard', { card_name: response.data.name, card_furigana: response.data.furigana, card_birthday: response.data.birthday, card_favourite: response.data.favourite, card_skills: response.data.skills, uID: this.$store.state.uID })
+        this.$store.dispatch('createCard', {
+          card_name: response.data.name,
+          card_furigana: response.data.furigana,
+          card_birthday: response.data.birthday,
+          card_favourite: response.data.favourite,
+          card_skills: response.data.skills,
+          uID: this.$store.state.uID
+        })
         console.log(this.$store.state)
         this.CARD_NAME = response.data.name
         this.CARD_FURIGANA = response.data.furigana
