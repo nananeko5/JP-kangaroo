@@ -1,18 +1,19 @@
 <template>
-    <div id="app" class="container">
+    <div id="gallery" class="container">
         <h1>Gallery</h1>
-        <ul>
-            <li v-for="(person, index) in people" :key="index">
-                <button v-on:click="showCard(index)">
-                    {{ person.name }}
-                </button>
-            </li>
-        </ul>
+        <div class="wrapper grid">
+          <div v-for="(person, index) in people" class="item">
+            <img style="width: 100px; height: 100px" :src="person.imgpath"></img>
+            <p><button v-on:click="showCard(index)">{{ person.name }}</button></p>
+          </div>
+        </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import firebase from "firebase/conpat/app";
+import "firebase/conpat/storage";
 export default {
   name: 'gallery',
   data () {
@@ -46,10 +47,16 @@ export default {
         imgpath: ''
       }
       for (var i in response.data) {
+        const downloadURL = ''
+        const storageRef = firebase.storage().ref("images/" + response.data[i].imgpath);
+        storageRef.getDownloadURL().then(url => {
+            console.log(url)
+            downloadURL = url
+        });
         data = {
           id: response.data[i].id,
           name: response.data[i].name,
-          imgpath: response.data[i].imgpath
+          imgpath: downloadURL
         }
         this.people.push(data)
       }
