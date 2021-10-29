@@ -12,8 +12,8 @@
 
 <script>
 import axios from 'axios'
-import firebase from "firebase/conpat/app";
-import "firebase/conpat/storage";
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
 export default {
   name: 'gallery',
   data () {
@@ -47,7 +47,7 @@ export default {
         imgpath: ''
       }
       for (var i in response.data) {
-        const downloadURL = ''
+        let downloadURL = ''
         const storageRef = firebase.storage().ref("images/" + response.data[i].imgpath);
         storageRef.getDownloadURL().then(url => {
             console.log(url)
